@@ -53,4 +53,4 @@ jobs:
         with:
           app-name: 'jsfootball-angular'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50ED96DB004247C7A77AA9BB3FADA561 }}
-          package: '$(Pipeline.Workspace)/dist/jsfootball-angular'
+          package: '$(Pipeline.Workspace)/dist'
