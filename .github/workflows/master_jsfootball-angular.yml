@@ -24,11 +24,10 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --prod
-        working-directory: .
+          npm run build --if-present
+          npm run test --if-present
 
-      - name: Archive build
-        if: success()
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
@@ -38,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -52,6 +51,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'jsfootball-angular'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_9650f63928c14def8b639832e152691b }}
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D2EEAF6D136C4AAA93B4867F6A8EDC4C }}
           package: .
