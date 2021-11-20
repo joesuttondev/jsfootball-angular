@@ -29,28 +29,29 @@ jobs:
 
       - name: Archive build
         if: success()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: deploy_dist
-          path: dist
+          name: node-app
+          path: .
           
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: deploy_dist
+          name: node-app
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'jsfootball-angular'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50ED96DB004247C7A77AA9BB3FADA561 }}
-          package: '$(Pipeline.Workspace)/dist'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_9650f63928c14def8b639832e152691b }}
+          package: .
