@@ -1,0 +1,26 @@
+<h2>Teams</h2>
+<div class="container">
+<div class="row">
+  <div *ngFor="let team of teams" class="col-lg-3 p-2">
+    <mat-card >
+      <mat-card-title-group>
+        <img mat-card-sm-image class="img-small" src="{{team.crestUrl}}">
+        <mat-card-title>{{team.shortName}}</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <div class="container">
+          <div class="row">
+            {{team.tla}}
+          </div>
+          <div class="row">
+            {{team.venue}}
+          </div>
+          <div class="row">
+            <a href="{{team.website}}">{{team.website}}</a>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+</div>
