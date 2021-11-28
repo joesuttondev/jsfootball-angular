@@ -1,0 +1,19 @@
+<mat-card *ngIf="team" >
+  <mat-card-title-group>
+    <img mat-card-sm-image class="img-small" src="{{team.crestUrl}}">
+    <mat-card-title>{{team.shortName}}</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content *ngIf="!headerOnly">
+    <div class="container">
+      <div class="row">
+        {{team.tla}}
+      </div>
+      <div class="row">
+        {{team.venue}}
+      </div>
+      <div class="row">
+        <a href="{{team.website}}">{{team.website}}</a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

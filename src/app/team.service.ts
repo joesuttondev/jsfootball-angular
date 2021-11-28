@@ -14,7 +14,7 @@ export class TeamService {
 
   private teamsURL = 'https://jsfootball-api.azurewebsites.net/api/teams';
 
-  getHeroes(): Observable<Team[]> {
+  getTeams(): Observable<Team[]> {
     return this.http.get<Team[]>(this.teamsURL)
   }
 }
