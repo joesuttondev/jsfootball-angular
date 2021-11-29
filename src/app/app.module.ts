@@ -10,7 +10,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { TeamComponent } from './team/team.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FixturesComponent } from './fixtures/fixtures.component';
-import { Route, Router } from '@angular/router';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+
+
+import { CommonModule } from '@angular/common';
+import { DemoUtilsModule } from '../demo-utils/module';
+import { DemoComponent } from './component';
 
 @NgModule({
   declarations: [
@@ -26,8 +33,11 @@ import { Route, Router } from '@angular/router';
     MatCardModule,
     HttpClientModule,
     MatToolbarModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     MatIconModule,
-    Router,
   ],
   providers: [],
   bootstrap: [AppComponent]
