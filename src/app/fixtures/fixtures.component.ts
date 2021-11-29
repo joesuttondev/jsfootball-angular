@@ -1,128 +1,79 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import {
-  isSameMonth,
-  isSameDay,
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  startOfDay,
-  endOfDay,
-  format,
-} from 'date-fns';
-import { Observable } from 'rxjs';
-import { colours } from '../colours';
-import { Fixture } from '../fixture';
-
-
-
-
-function getTimezoneOffsetString(date: Date): string {
-  const timezoneOffset = date.getTimezoneOffset();
-  const hoursOffset = String(
-    Math.floor(Math.abs(timezoneOffset / 60))
-  ).padStart(2, '0');
-  const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-  const direction = timezoneOffset > 0 ? '-' : '+';
-
-  return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
-}
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { CalendarConfig, DayC } from 'material-calendar';
 
 @Component({
-  selector: 'mwl-demo-component',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'fixtures.component.html',
+  selector: 'app-fixtures',
+  templateUrl: './fixtures.component.html',
+  styleUrls: ['./fixtures.component.css']
 })
-
 export class FixturesComponent implements OnInit {
-  view: CalendarView = CalendarView.Month;
 
-  viewDate: Date = new Date();
+  toggleControl = new FormControl(false);
+  @HostBinding('class') className = '';
 
-  events$?: Observable<CalendarEvent<{ fixture: Fixture }>[]>;
+  placeholder = false // boolean
+  isLoading = true
+  latestEvent = ""
 
-  activeDayIsOpen: boolean = false;
+  monthsAfterBefore = Array(5).fill(0).map((x, i) => i);
+  monthsBefore = 0;
+  monthsAfter = 2;
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.fetchEvents();
+  calendarConfig: CalendarConfig = {
+    renderMode: 'monthly', // 'annual' | 'monthly'
+    selectMode: 'range',  // 'click' | 'range'
+    displayYear: true,
+    firstDayOfWeekMonday: true,
+    calendarWeek: false,
+    switches: true,
+    panelWidth: '300px',
+    bluredDays: true, // default: false
+    markWeekend: true // default: true
   }
 
-  fetchEvents(): void {
-    const getStart: any = {
-      month: startOfMonth,
-      week: startOfWeek,
-      day: startOfDay,
-    }[this.view];
-
-    const getEnd: any = {
-      month: endOfMonth,
-      week: endOfWeek,
-      day: endOfDay,
-    }[this.view];
-
-    const params = new HttpParams()
-      .set(
-        'primary_release_date.gte',
-        format(getStart(this.viewDate), 'yyyy-MM-dd')
-      )
-      .set(
-        'primary_release_date.lte',
-        format(getEnd(this.viewDate), 'yyyy-MM-dd')
-      )
-      .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-    this.events$ = this.http
-      .get('https://api.themoviedb.org/3/discover/movie', { params })
-      .pipe(
-        map(({ results }: { results: Fixture[] }) => {
-          return results.map((fixture: Fixture) => {
-            return {
-              title: fixture.homeTeam.name,
-              start: new Date(
-                fixture.datetime + getTimezoneOffsetString(this.viewDate?)
-              ),
-              color: colours.yellow,
-              allDay: true,
-              meta: {
-                fixture,
-              },
-            };
-          });
-        })
-      );
-  }
-
-  dayClicked({
-    date,
-    events,
-  }: {
-    date: Date;
-    events: CalendarEvent<{ fixture: Fixture }>[];
-  }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
+  dataSource: DayC[] = [
+    {
+      date: 1634594400000,
+      backgroundColor: '#0167c7',
+      toolTip: 'Test ToolTip First',
+    },
+    {
+      date: 1634594400000,
+      backgroundColor: 'rgb(6, 182, 0)',
+      toolTip: 'Test ToolTip Second',
+    },
+    {
+      date: 1634853600000,
+      backgroundColor: 'rgb(6, 182, 0)',
+      toolTip: 'Test ToolTip 2',
+    },
+    {
+      date: 1635544800000,
+      backgroundColor: 'lightblue'
     }
+  ]
+
+  constructor(private overlay: OverlayContainer) { }
+  ngOnInit(): void {
+    // this.toggleControl.valueChanges.subscribe((darkMode) => {
+    //   const darkClassName = 'darkMode';
+    //   this.className = darkMode ? darkClassName : '';
+    //   if (darkMode) {
+    //     this.overlay.getContainerElement().classList.add(darkClassName);
+    //   } else {
+    //     this.overlay.getContainerElement().classList.remove(darkClassName);
+    //   }
+    // });
+
+    console.log(this.dataSource)
+    this.isLoading = false
   }
 
-  eventClicked(event: CalendarEvent<{ fixture: Fixture }>): void {
-    window.open(
-      `https://www.themoviedb.org/movie/${event.meta?.fixture.id}`,
-      '_blank'
-    );
+  testMethod(event: any) {
+    this.latestEvent = event;
+    console.log(event)
   }
-
 
 }

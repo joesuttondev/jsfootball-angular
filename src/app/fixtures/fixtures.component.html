@@ -1,42 +1,36 @@
-<mwl-demo-utils-calendar-header
-  [(view)]="view"
-  [(viewDate)]="viewDate"
-  (viewDateChange)="fetchEvents()"
-  (viewChange)="fetchEvents()"
->
-</mwl-demo-utils-calendar-header>
-
-<ng-template #loading>
-  <div class="text-center">
-    <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
-    Loading events...
+<mat-toolbar color="primary">
+  Material Calendar
+  <div style="display: flex; justify-content: space-around;">
+    <mat-slide-toggle [formControl]="toggleControl">
+      Toggle Themes
+    </mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="placeholder">
+      Days placeholder
+    </mat-slide-toggle>
   </div>
-</ng-template>
+</mat-toolbar>
 
-<div *ngIf="events$ | async; else loading; let events">
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="eventClicked($event.event)"
-    >
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventClicked)="eventClicked($event.event)"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventClicked)="eventClicked($event.event)"
-    >
-    </mwl-calendar-day-view>
+<div class="selection mat-app-background">
+  <mat-form-field>
+    <mat-label>Months before</mat-label>
+    <mat-select [(ngModel)]="monthsBefore">
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Months after</mat-label>
+    <mat-select [(ngModel)]="monthsAfter">
+      <mat-option *ngFor="let num of monthsAfterBefore" [value]="num">{{num}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    Events: {{ latestEvent | json }}
   </div>
+</div>
+
+<div class="mat-app-background" style="height: 80%;">
+  <calendar-panel [placeholderDay]="placeholder"  [year]="2021" [month]="7"
+    [monthsBefore]="monthsBefore" [monthsAfter]="monthsAfter" [config]="calendarConfig"
+    (clickDate)="testMethod($event)">
+  </calendar-panel>
 </div>
