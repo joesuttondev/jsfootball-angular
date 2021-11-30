@@ -6,7 +6,7 @@ import { CalendarConfig, DayC } from 'material-calendar';
 @Component({
   selector: 'app-fixtures',
   templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.scss'],
+  styleUrls: ['./fixtures.component.css'],
 })
 export class FixturesComponent implements OnInit {
   title = 'Material Calendar Demo';
