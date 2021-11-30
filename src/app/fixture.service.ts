@@ -12,5 +12,18 @@ export class FixtureService {
     private http: HttpClient
   ) { }
 
-
+  // getFixtures(): Observable<DayC[]> {
+  //   return this.http.get<Fixture[]>(this.fixturesURL).pipe(
+  //     map((results: Fixture[]) => {
+  //       console.log(Number(new Date));
+  //       return results.map((fixture: Fixture) => {
+  //         return {
+  //           date: 1638230400000,
+  //           color: 'red',
+  //           backgroundColor: 'black',
+  //         };
+  //       });
+  //     })
+  //   );
+  // }
 }
