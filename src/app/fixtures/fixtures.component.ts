@@ -1,37 +1,40 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CalendarConfig, DayC } from 'material-calendar';
 
 @Component({
   selector: 'app-fixtures',
   templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.css']
+  styleUrls: ['./fixtures.component.scss'],
 })
 export class FixturesComponent implements OnInit {
+  title = 'Material Calendar Demo';
 
   toggleControl = new FormControl(false);
   @HostBinding('class') className = '';
 
-  placeholder = false // boolean
-  isLoading = true
-  latestEvent = ""
+  placeholder = false; // boolean
+  isLoading = true;
+  latestEvent = '';
 
-  monthsAfterBefore = Array(5).fill(0).map((x, i) => i);
+  monthsAfterBefore = Array(5)
+    .fill(0)
+    .map((x, i) => i);
   monthsBefore = 0;
   monthsAfter = 2;
 
   calendarConfig: CalendarConfig = {
     renderMode: 'monthly', // 'annual' | 'monthly'
-    selectMode: 'range',  // 'click' | 'range'
+    selectMode: 'click', // 'click' | 'range'
     displayYear: true,
     firstDayOfWeekMonday: true,
     calendarWeek: false,
     switches: true,
     panelWidth: '300px',
-    bluredDays: true, // default: false
-    markWeekend: true // default: true
-  }
+    bluredDays: false, // default: false
+    markWeekend: false, // default: true
+  };
 
   dataSource: DayC[] = [
     {
@@ -51,29 +54,37 @@ export class FixturesComponent implements OnInit {
     },
     {
       date: 1635544800000,
-      backgroundColor: 'lightblue'
+      backgroundColor: 'lightblue',
+    },
+  ];
+
+  constructor(private overlay: OverlayContainer) {}
+
+  ngAfterViewInit(): void {
+    var elements = document.getElementsByClassName('tooltip');
+    while (elements.length > 0) {
+      console.log(elements[0]);
+      elements[0].classList.remove('tooltip');
     }
-  ]
+  }
 
-  constructor(private overlay: OverlayContainer) { }
   ngOnInit(): void {
-    // this.toggleControl.valueChanges.subscribe((darkMode) => {
-    //   const darkClassName = 'darkMode';
-    //   this.className = darkMode ? darkClassName : '';
-    //   if (darkMode) {
-    //     this.overlay.getContainerElement().classList.add(darkClassName);
-    //   } else {
-    //     this.overlay.getContainerElement().classList.remove(darkClassName);
-    //   }
-    // });
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+      const darkClassName = 'darkMode';
+      this.className = darkMode ? darkClassName : '';
+      if (darkMode) {
+        this.overlay.getContainerElement().classList.add(darkClassName);
+      } else {
+        this.overlay.getContainerElement().classList.remove(darkClassName);
+      }
+    });
 
-    console.log(this.dataSource)
-    this.isLoading = false
+    //console.log(this.dataSource)
+    this.isLoading = false;
   }
 
   testMethod(event: any) {
     this.latestEvent = event;
-    console.log(event)
+    console.log(event);
   }
-
 }
