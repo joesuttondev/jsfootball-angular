@@ -2,7 +2,7 @@ import { Team } from "./team";
 
 export interface Fixture {
   id: number;
-  datetime: Date;
+  utcDate: Date;
   status: string;
   homeTeam: Team;
   awayTeam: Team;

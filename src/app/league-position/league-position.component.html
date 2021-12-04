@@ -1,0 +1,14 @@
+<mat-card *ngIf="leaguePosition" >
+  <mat-card-title-group>
+   <div class="col">{{leaguePosition.position}}</div>
+   <div class="col-4 col-lg-3"><div class="full-text">{{leaguePosition.team.name}}</div><div class="short-text">{{leaguePosition.team.shortName}}</div></div>
+   <div class="col">{{leaguePosition.played}}</div>
+   <div class="col wide-only">{{leaguePosition.won}}</div>
+   <div class="col wide-only">{{leaguePosition.drawn}}</div>
+   <div class="col wide-only">{{leaguePosition.lost}}</div>
+   <div class="col wide-only">{{leaguePosition.for}}</div>
+   <div class="col wide-only">{{leaguePosition.against}}</div>
+   <div class="col">{{leaguePosition.goalDifference}}</div>
+   <div class="col">{{leaguePosition.points}}</div>
+  </mat-card-title-group>
+</mat-card>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <mat-card>
+        <mat-card-title-group>
+        <div class="col">#</div>
+        <div class="col-4 col-lg-3">TEAM</div>
+        <div class="col">P</div>
+        <div class="col wide-only">W</div>
+        <div class="col wide-only">D</div>
+        <div class="col wide-only">L</div>
+        <div class="col wide-only">F</div>
+        <div class="col wide-only">A</div>
+        <div class="col">GD</div>
+        <div class="col">PTS</div>
+      </mat-card-title-group>
+    </mat-card>
+  </div>
+  </div>
+  <div class="row" *ngFor="let position of positions">
+    <app-league-position [leaguePosition]="position"></app-league-position>
+  </div>
+</div>

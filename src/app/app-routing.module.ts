@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeamsComponent } from './teams/teams.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
+import { LeagueComponent } from './league/league.component';
 
 const routes: Routes = [
   { path: 'teams', component: TeamsComponent },
   { path: 'fixtures', component: FixturesComponent },
+  { path: 'table', component: LeagueComponent },
   { path: '', redirectTo: '/teams', pathMatch: 'full' },
 ];
 

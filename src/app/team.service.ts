@@ -4,17 +4,14 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   private teamsURL = 'https://jsfootball-api.azurewebsites.net/api/teams';
 
   getTeams(): Observable<Team[]> {
-    return this.http.get<Team[]>(this.teamsURL)
+    return this.http.get<Team[]>(this.teamsURL);
   }
 }
