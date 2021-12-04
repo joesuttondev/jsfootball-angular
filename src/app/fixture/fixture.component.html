@@ -2,18 +2,18 @@
   <mat-card-title-group>
     <div class="container">
       <div class="row">
-        <div class="col-1">{{ fixture.utcDate | date: "d MMM" }}</div>
-        <div class="col-1"><img class="crest-image-small" src="{{fixture.homeTeam.crestUrl}}"></div>
-        <div class="col-9">{{ fixture.homeTeam.name }}</div>
-        <div class="col-1 align-end" *ngIf="fixture.status == 'FINISHED'">
+        <div class="col-2">{{ fixture.utcDate | date: "d MMM" }}</div>
+        <div class="col-2"><img class="crest-image-small" src="{{fixture.homeTeam.crestUrl}}"></div>
+        <div class="col-6">{{ fixture.homeTeam.name }}</div>
+        <div class="col-2 align-end" *ngIf="fixture.status == 'FINISHED'">
           {{ fixture.score.fullTime.homeTeam }}
         </div>
       </div>
       <div class="row">
-        <div class="col-1">{{ fixture.utcDate | date: "shortTime" }}</div>
-        <div class="col-1"><img class="crest-image-small" src="{{fixture.awayTeam.crestUrl}}"></div>
-        <div class="col-9">{{ fixture.awayTeam.name }}</div>
-        <div class="col-1 align-end" *ngIf="fixture.status == 'FINISHED'">
+        <div class="col-2">{{ fixture.utcDate | date: "shortTime" }}</div>
+        <div class="col-2"><img class="crest-image-small" src="{{fixture.awayTeam.crestUrl}}"></div>
+        <div class="col-6">{{ fixture.awayTeam.name }}</div>
+        <div class="col-2 align-end" *ngIf="fixture.status == 'FINISHED'">
           {{ fixture.score.fullTime.awayTeam }}
         </div>
       </div>
