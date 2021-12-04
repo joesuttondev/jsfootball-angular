@@ -25,7 +25,9 @@ jobs:
         run: |
           npm install
           npm run build --prod
-          
+        env:
+          CI: false
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
