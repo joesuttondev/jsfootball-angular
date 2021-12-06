@@ -17,3 +17,4 @@
     </div>
   </mat-card-content>
 </mat-card>
+<app-fixtures *ngIf="!headerOnly && team" [teamID]="team?.id"></app-fixtures>

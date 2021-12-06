@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Team } from '../team';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { TeamService } from '../team.service';
 
 @Component({
   selector: 'app-team',
@@ -8,12 +11,25 @@ import { Team } from '../team';
 })
 export class TeamComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private teamService: TeamService
+    ) { }
 
-  @Input() team?: Team;
+  @Input() team: Team | undefined;
   @Input() headerOnly: boolean = false;
 
   ngOnInit(): void {
+    if (this.team == null)
+    {
+      this.getTeam();
+    }
   }
 
+  getTeam(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Navigated ID: ' + id);
+    this.teamService.getTeam(id).subscribe(team => this.team = team[0]);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, Input } from '@angular/core';
 import { FixtureService } from '../fixture.service';
 import { Fixture } from '../fixture';
 import { MatRadioChange } from '@angular/material/radio';
@@ -10,37 +10,58 @@ import { pipe } from 'rxjs';
   styleUrls: ['./fixtures.component.css'],
 })
 export class FixturesComponent implements OnInit {
+  @Input() teamID: number | undefined;
+
   constructor(private fixtureService: FixtureService) {}
   ngOnInit(): void {
-    this.fixtureService
-      .getFixtures()
-      .subscribe((f: Fixture[]) => (this.fixtures = f));
+console.log(this.teamID);
+
+
+    if (this.teamID != null && this.teamID > 0) {
+      this.fixtureService
+        .getTeamFixtures(this.teamID)
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    } else {
+      this.fixtureService
+        .getFixtures()
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    }
   }
 
   onTypeChanged(event: MatRadioChange) {
-console.log(event);
-
+    console.log(event);
 
     switch (event.value) {
       case '1': {
         console.log('getting fixtures');
-        this.fixtureService
-          .getFixtures()
-          .subscribe((f: Fixture[]) => (this.fixtures = f));
-          break;
+        if (this.teamID != null && this.teamID > 0) {
+          this.fixtureService
+            .getTeamFixtures(this.teamID)
+            .subscribe((f: Fixture[]) => (this.fixtures = f));
+        } else {
+          this.fixtureService
+            .getFixtures()
+            .subscribe((f: Fixture[]) => (this.fixtures = f));
+        }
+        break;
       }
       case '2': {
         console.log('getting results');
-        this.fixtureService
-          .getResults()
-          .subscribe((f: Fixture[]) => (this.fixtures = f));
-          break;
-      }
-      default:
-        {
-          console.log('getting nothing');
-          this.fixtures = [];
+        if (this.teamID != null && this.teamID > 0) {
+          this.fixtureService
+            .getTeamResults(this.teamID)
+            .subscribe((f: Fixture[]) => (this.fixtures = f));
+        } else {
+          this.fixtureService
+            .getResults()
+            .subscribe((f: Fixture[]) => (this.fixtures = f));
         }
+        break;
+      }
+      default: {
+        console.log('getting nothing');
+        this.fixtures = [];
+      }
     }
 
     console.log(this.fixtures);

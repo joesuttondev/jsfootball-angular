@@ -22,18 +22,15 @@ export class FixtureService {
     );
   }
 
-  // getFixtures(): Observable<DayC[]> {
-  //   return this.http.get<Fixture[]>(this.fixturesURL).pipe(
-  //     map((results: Fixture[]) => {
-  //       console.log(Number(new Date));
-  //       return results.map((fixture: Fixture) => {
-  //         return {
-  //           date: 1638230400000,
-  //           color: 'red',
-  //           backgroundColor: 'black',
-  //         };
-  //       });
-  //     })
-  //   );
-  // }
+  getTeamFixtures(teamID: number): Observable<Fixture[]> {
+    return this.http.get<Fixture[]>(this.fixturesURL + '/team/' + teamID + '?status=SCHEDULED');
+  }
+  getTeamResults(teamID: number): Observable<Fixture[]> {
+    return this.http.get<Fixture[]>(this.fixturesURL + '/team/' + teamID + '?status=FINISHED').pipe(
+      map(fixtures => fixtures.sort((a: Fixture, b: Fixture) =>
+        (new Date(b.utcDate)).getTime() - (new Date(a.utcDate)).getTime()
+      ))
+    );
+  }
+
 }

@@ -1,7 +1,7 @@
 <div class="container">
 <div class="row">
-  <div *ngFor="let team of teams" class="col-lg-3 p-2">
-    <app-team [team]="team" [headerOnly]="false"></app-team>
-  </div>
+  <a *ngFor="let team of teams" class="col-lg-3 p-2" routerLink="/team/{{team.id}}">
+    <app-team [team]="team" [headerOnly]="true"></app-team>
+  </a>
 </div>
 </div>
