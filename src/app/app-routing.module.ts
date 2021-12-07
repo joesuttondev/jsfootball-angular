@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'fixtures', component: FixturesComponent },
   { path: 'table', component: LeagueComponent },
   { path: 'team/:id', component: TeamComponent },
-  { path: '', redirectTo: '/teams', pathMatch: 'full' },
+  { path: '', redirectTo: '/table', pathMatch: 'full' },
 ];
 
 @NgModule({
