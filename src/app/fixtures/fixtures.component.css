@@ -19,3 +19,9 @@ mat-toolbar > div > mat-slide-toggle {
 .selection > * {
   margin: 12px;
 }
+
+
+.viewport {
+  height: 400px;
+  width: 100%;
+}

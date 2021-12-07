@@ -1,9 +1,33 @@
-<mat-radio-group value="1" (change)="onTypeChanged($event)">
+<!-- <mat-radio-group value="1" (change)="onTypeChanged($event)">
   <mat-radio-button class="pe-2" value="1">FIXTURES</mat-radio-button>
   <mat-radio-button value="2">RESULTS</mat-radio-button>
-</mat-radio-group>
-<div class="container">
-  <div *ngFor="let fixture of fixtures" class="row">
-    <app-fixture [fixture]="fixture"></app-fixture>
-  </div>
+</mat-radio-group> -->
+
+<div class="btn-group" role="group" aria-label="Fixture type">
+  <input
+    type="radio"
+    class="btn-check"
+    name="btnradio"
+    id="fixtures"
+    autocomplete="off"
+    checked
+    (click)="onFixturesClicked()"
+  />
+  <label class="btn btn-outline-primary" for="fixtures">FIXTURES</label>
+
+  <input
+    type="radio"
+    class="btn-check"
+    name="btnradio"
+    id="results"
+    autocomplete="off"
+    (click)="onResultsClicked()"
+  />
+  <label class="btn btn-outline-primary" for="results">RESULTS</label>
+</div>
+
+<div class="card h-100">
+  <ul class="list-group list-group-flush" *ngFor="let fixture of fixtures">
+    <li class="list-group-item"><app-fixture [fixture]="fixture"></app-fixture></li>
+  </ul>
 </div>

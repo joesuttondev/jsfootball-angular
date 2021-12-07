@@ -1,8 +1,15 @@
-import { Component, HostBinding, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { FixtureService } from '../fixture.service';
 import { Fixture } from '../fixture';
 import { MatRadioChange } from '@angular/material/radio';
-import { pipe } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fixtures',
@@ -14,8 +21,7 @@ export class FixturesComponent implements OnInit {
 
   constructor(private fixtureService: FixtureService) {}
   ngOnInit(): void {
-console.log(this.teamID);
-
+    console.log(this.teamID);
 
     if (this.teamID != null && this.teamID > 0) {
       this.fixtureService
@@ -24,6 +30,32 @@ console.log(this.teamID);
     } else {
       this.fixtureService
         .getFixtures()
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    }
+  }
+
+  onFixturesClicked() {
+    console.log('Fixtures clicked');
+    if (this.teamID != null && this.teamID > 0) {
+      this.fixtureService
+        .getTeamFixtures(this.teamID)
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    } else {
+      this.fixtureService
+        .getFixtures()
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    }
+  }
+
+  onResultsClicked() {
+    console.log('Results clicked');
+    if (this.teamID != null && this.teamID > 0) {
+      this.fixtureService
+        .getTeamResults(this.teamID)
+        .subscribe((f: Fixture[]) => (this.fixtures = f));
+    } else {
+      this.fixtureService
+        .getResults()
         .subscribe((f: Fixture[]) => (this.fixtures = f));
     }
   }

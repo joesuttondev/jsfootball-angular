@@ -1,20 +1,15 @@
-<mat-card *ngIf="team" >
-  <mat-card-title-group>
-    <img class="crest-image" src="{{team.crestUrl}}">
-    <mat-card-title>{{team.shortName}}</mat-card-title>
-  </mat-card-title-group>
-  <mat-card-content *ngIf="!headerOnly">
-    <div class="container">
-      <div class="row">
-        {{team.tla}}
-      </div>
-      <div class="row">
-        {{team.venue}}
-      </div>
-      <div class="row">
-        <a href="{{team.website}}">{{team.website}}</a>
-      </div>
+<div class="card" *ngIf="team">
+  <div class="text-center p-2">
+    <img
+    src="{{ team.crestUrl }}"
+    class="card-img-top"
+    alt="{{ team.shortName + ' crest' }}"
+    />
+  </div>
+  <div class="card-header">
+    {{team.shortName}}
+  </div>
+    <div *ngIf="!headerOnly">
+      <app-fixtures *ngIf="!headerOnly && team" [teamID]="team?.id"></app-fixtures>
     </div>
-  </mat-card-content>
-</mat-card>
-<app-fixtures *ngIf="!headerOnly && team" [teamID]="team?.id"></app-fixtures>
+</div>

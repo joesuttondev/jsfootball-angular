@@ -1,7 +1,7 @@
-<mat-card *ngIf="leaguePosition" >
-  <mat-card-title-group>
+<div class="container" *ngIf="leaguePosition" routerLink="/team/{{leaguePosition.team.id}}">
+  <div class="row">
    <div class="col">{{leaguePosition.position}}</div>
-   <a routerLink="/team/{{leaguePosition.team.id}}" class="col-4 col-lg-3"><div class="full-text">{{leaguePosition.team.name}}</div><div class="short-text">{{leaguePosition.team.shortName}}</div></a>
+   <div class="col-4 col-lg-3"><div class="full-text">{{leaguePosition.team.shortName}}</div><div class="short-text">{{leaguePosition.team.tla}}</div></div>
    <div class="col">{{leaguePosition.played}}</div>
    <div class="col wide-only">{{leaguePosition.won}}</div>
    <div class="col wide-only">{{leaguePosition.drawn}}</div>
@@ -10,5 +10,5 @@
    <div class="col wide-only">{{leaguePosition.against}}</div>
    <div class="col">{{leaguePosition.goalDifference}}</div>
    <div class="col">{{leaguePosition.points}}</div>
-  </mat-card-title-group>
-</mat-card>
+  </div>
+</div>

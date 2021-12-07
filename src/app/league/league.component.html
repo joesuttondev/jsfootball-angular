@@ -1,8 +1,7 @@
-<div class="container">
-  <div class="row">
-    <div>
-      <mat-card>
-        <mat-card-title-group>
+<div class="card h-100">
+  <div class="card-header">
+    <div class="container">
+      <div class="row">
         <div class="col">#</div>
         <div class="col-4 col-lg-3">TEAM</div>
         <div class="col">P</div>
@@ -13,11 +12,12 @@
         <div class="col wide-only">A</div>
         <div class="col">GD</div>
         <div class="col">PTS</div>
-      </mat-card-title-group>
-    </mat-card>
+      </div>
+    </div>
   </div>
-  </div>
-  <div class="row" *ngFor="let position of positions">
-    <app-league-position [leaguePosition]="position"></app-league-position>
-  </div>
+  <ul class="list-group list-group-flush" *ngFor="let position of positions">
+    <li class="list-group-item">
+      <app-league-position [leaguePosition]="position"></app-league-position>
+    </li>
+  </ul>
 </div>

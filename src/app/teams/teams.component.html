@@ -1,7 +1,12 @@
-<div class="container">
-<div class="row">
-  <a *ngFor="let team of teams" class="col-lg-3 p-2" routerLink="/team/{{team.id}}">
-    <app-team [team]="team" [headerOnly]="true"></app-team>
-  </a>
-</div>
+<div class="container pt-2">
+  <div class="row">
+    <div *ngFor="let team of teams" class="col-lg-3 pb-2 text-decoration-none">
+      <app-team
+        [team]="team"
+        [headerOnly]="true"
+        routerLink="/team/{{ team.id }}"
+        class="team-card"
+      ></app-team>
+    </div>
+  </div>
 </div>
