@@ -27,7 +27,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: block;
 }
 
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(md) {
   .wide-only, .full-text {
     display: block;
   }

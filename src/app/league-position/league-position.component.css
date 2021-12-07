@@ -4,28 +4,17 @@
 
 
 .league-position-1, .league-position-2, .league-position-3, .league-position-4{
-  height: var(--bs-body-font-size);
-  width: var(--bs-body-font-size);
   background-color: #072d5b;
-  border-radius: 50%;
   display: inline-block;
-  /* margin-left: -2em; */
 }
 
 .league-position-5{
-  height: var(--bs-body-font-size);
-  width: var(--bs-body-font-size);
   background-color: #ab5e03;
-  border-radius: 50%;
   display: inline-block;
-  /* margin-left: -2em; */
 }
 
 .league-position-18, .league-position-19, .league-position-20{
-  height: var(--bs-body-font-size);
-  width: var(--bs-body-font-size);
   background-color: #961a3d;
-  border-radius: 50%;
   display: inline-block;
-  /* margin-left: -2em; */
 }
+

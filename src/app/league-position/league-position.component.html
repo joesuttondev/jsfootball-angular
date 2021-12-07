@@ -1,24 +1,27 @@
-<div class="container" *ngIf="leaguePosition" routerLink="/team/{{leaguePosition.team.id}}">
+<div
+  class="container"
+  *ngIf="leaguePosition"
+  routerLink="/team/{{ leaguePosition.team.id }}"
+>
   <div class="row">
-   <div class="col">
-
-
-
-
-
-    {{leaguePosition.position}}
-
-  <div class="league-position-{{leaguePosition.position}}"></div>
-
-  </div>
-   <div class="col-4 col-lg-3"><div class="full-text">{{leaguePosition.team.shortName}}</div><div class="short-text">{{leaguePosition.team.tla}}</div></div>
-   <div class="col">{{leaguePosition.played}}</div>
-   <div class="col wide-only">{{leaguePosition.won}}</div>
-   <div class="col wide-only">{{leaguePosition.drawn}}</div>
-   <div class="col wide-only">{{leaguePosition.lost}}</div>
-   <div class="col wide-only">{{leaguePosition.for}}</div>
-   <div class="col wide-only">{{leaguePosition.against}}</div>
-   <div class="col">{{leaguePosition.goalDifference}}</div>
-   <div class="col">{{leaguePosition.points}}</div>
+    <div class="col">
+      <div>
+        {{ leaguePosition.position }}
+        <span class="badge league-position-{{ leaguePosition.position }}">
+        </span>
+      </div>
+    </div>
+    <div class="col-4 col-lg-3">
+      <div class="full-text">{{ leaguePosition.team.shortName }}</div>
+      <div class="short-text">{{ leaguePosition.team.tla }}</div>
+    </div>
+    <div class="col">{{ leaguePosition.played }}</div>
+    <div class="col wide-only">{{ leaguePosition.won }}</div>
+    <div class="col wide-only">{{ leaguePosition.drawn }}</div>
+    <div class="col wide-only">{{ leaguePosition.lost }}</div>
+    <div class="col wide-only">{{ leaguePosition.for }}</div>
+    <div class="col wide-only">{{ leaguePosition.against }}</div>
+    <div class="col">{{ leaguePosition.goalDifference }}</div>
+    <div class="col">{{ leaguePosition.points }}</div>
   </div>
 </div>
